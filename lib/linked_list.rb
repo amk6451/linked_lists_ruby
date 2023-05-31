@@ -18,6 +18,19 @@ class LinkedList
           end
     end
 
+
+
+    def prepend(value)
+        new_node = Node.new(value)
+        if @head.nil?
+            @head = new_node
+        else
+            current = @head
+            @head = new_node
+            @head.next_node = current
+        end
+    end
+
     def display
         current = @head
         values = []
@@ -33,4 +46,5 @@ a = LinkedList.new
 a.append('first')
 a.append('second')
 a.append('third')
+a.prepend("zero")
 a.display
