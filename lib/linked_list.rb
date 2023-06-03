@@ -34,16 +34,6 @@ class LinkedList
         end
     end
 
-    def display
-        current = @head
-        values = []
-        while current
-          values << current.value
-          current = current.next_node
-        end
-        puts values.join(' -> ')
-      end
-
     def size
         count = 0
         if @head.nil?
@@ -81,6 +71,70 @@ class LinkedList
         puts current.value
     end
 
+    def pop
+        if @head.nil?
+            return
+        else
+            current = @head
+            prev = nil
+
+            if current.next_node.nil?
+                @head = nil
+                return current.value
+            end
+
+            while current.next_node
+                prev = current
+                current = current.next_node
+            end
+            prev.next_node = nil;
+            return current.value
+        end
+    end
+
+    def contains?(value)
+        if @head.nil?
+            return false
+        end
+
+        current = @head
+        while current
+            if value == current.value
+                return true
+            end
+            current = current.next_node
+        end
+        return false
+    end
+
+    def find(value)
+        if @head.nil?
+            return nil
+        end
+
+        index = 0
+
+        current = @head
+        while current
+            if value == current.value
+                return index
+            end
+            current = current.next_node
+            index += 1
+        end
+        return nil
+    end
+
+    def to_s
+        current = @head
+        values = []
+        while current
+          values << current.value
+          current = current.next_node
+        end
+        values << nil
+        puts values.join(' -> ')
+      end
 
 end
 
@@ -88,8 +142,8 @@ a = LinkedList.new
 a.append('first')
 a.append('second')
 a.append('third')
-a.prepend("zero")
-# a.size
-# a.tail
-a.at(3)
-a.display
+puts a.find('third')
+# puts a.contains?('third')
+# a.prepend("zero")
+# puts a.pop
+a.to_s
